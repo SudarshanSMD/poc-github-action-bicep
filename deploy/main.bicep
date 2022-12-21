@@ -18,6 +18,8 @@ param location string = resourceGroup().location
 
 var uniqueStorageName = '${storagePrefix}${uniqueString(resourceGroup().id)}'
 
+var uniqueStorageName1 = '${storagePrefix}${uniqueString(resourceGroup().id)}-1'
+
 resource stg 'Microsoft.Storage/storageAccounts@2021-04-01' = {
   name: uniqueStorageName
   location: location
@@ -31,3 +33,11 @@ resource stg 'Microsoft.Storage/storageAccounts@2021-04-01' = {
 }
 
 output storageEndpoint object = stg.properties.primaryEndpoints
+
+
+module stg './storage.bicep' = {
+  name: 'myStorageDeployment'
+  params: {
+    storageAccountName: uniqueStorageName1
+  }
+}
