@@ -35,9 +35,10 @@ resource stg 'Microsoft.Storage/storageAccounts@2021-04-01' = {
 output storageEndpoint object = stg.properties.primaryEndpoints
 
 
-module stg './storage.bicep' = {
+module stg2 './storage.bicep' = {
   name: 'myStorageDeployment'
   params: {
     storageAccountName: uniqueStorageName1
+    location: location
   }
 }
