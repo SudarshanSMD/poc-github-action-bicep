@@ -32,9 +32,6 @@ resource stg 'Microsoft.Storage/storageAccounts@2021-04-01' = {
   }
 }
 
-output storageEndpoint object = stg.properties.primaryEndpoints
-
-
 module stg2 './storage.bicep' = {
   name: 'myStorageDeployment'
   params: {
@@ -42,3 +39,5 @@ module stg2 './storage.bicep' = {
     location: location
   }
 }
+
+output storageEndpoint object = stg.properties.primaryEndpoints
